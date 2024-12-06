@@ -8,10 +8,19 @@ CREATE TABLE jobs (
     job_title VARCHAR(50) NOT NULL
 );
 
+create table user(
+	user_id int primary key,
+    login varchar(50) unique not null,
+    password varchar(50) not null,
+    email varchar(50) unique not null,
+    phone_number varchar(9),
+	admin boolean default false
+);
+
 create table employees(
 	employee_id int primary key,
     user_id int unique,
-    FOREIGN KEY (user_id) REFERENCES user(usser_id),
+    FOREIGN KEY (user_id) REFERENCES user(user_id),
     first_name varchar(50) not null,
     last_name varchar(50) not null,
     email varchar(50) unique,
@@ -31,18 +40,9 @@ create table customer(
     phone_number varchar(9)  
 );
 
-create table user(
-	user_id int primary key,
-    login varchar(50) unique not null,
-    password varchar(50) not null,
-    email varchar(50) unique not null,
-    phone_number varchar(9),
-	admin boolean default false
-);
-
 
 CREATE TABLE Books(
-	book_id int AUTO_INCREMENT PRIMARY KEY, 
+	book_id int PRIMARY KEY, 
     title varchar(50),
     author varchar(50),
     publication_date date,
@@ -50,31 +50,31 @@ CREATE TABLE Books(
     isbn varchar(50) unique
 );
 
-Create Table loans(
-	loan_id int auto_increment primary key,
-	book_id int,
-    usser_id int,
-    rental_date date not null,
-    return_date date,
-    primary key (book_id, usser_id),
-    foreign key (book_id) references books(book_id),
-    foreign key (usser_id) references usser(usser_id)
-);
-
 Create Table reservation(
     reservation_id int auto_increment primary key,
 	book_id int ,
-    usser_id int,
+    user_id int,
     reservation_date date,
 	reservation_end_date date,
-	primary key (book_id, usser_id),
+	-- primary key (book_id, user_id),
     foreign key (book_id) references books(book_id),
-    foreign key (usser_id) references usser(usser_id)
+    foreign key (user_id) references user(user_id)
 );
 
-insert into books
-values(2, "Imie Róży", "Umberto Eco", "2024-12-11", "Noir");
+Create Table loans(
+	loan_id int auto_increment primary key,
+	book_id int,
+    user_id int,
+    rental_date date not null,
+    return_date date,
+    -- primary key (book_id, user_id),
+    foreign key (book_id) references books(book_id),
+    foreign key (user_id) references user(user_id)
+);
 
-select * from Ksiazki;
+insert into Books
+values(1, "Imie Róży", "Umberto Eco", "2024-12-11", "Noir", "1234567");
+
+select * from Books;
 
 -- DROP DATABASE Biblioteka;
