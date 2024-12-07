@@ -8,13 +8,18 @@ CREATE TABLE jobs (
     job_title VARCHAR(50) NOT NULL
 );
 
-create table user(
+create table users(
 	user_id int primary key,
     login varchar(50) unique not null,
     password varchar(50) not null,
     email varchar(50) unique not null,
     phone_number varchar(9),
 	admin boolean default false
+);
+
+create table roles(
+	role_id int,
+    role_name varchar(50)
 );
 
 create table employees(
@@ -77,4 +82,4 @@ values(1, "Imie Róży", "Umberto Eco", "2024-12-11", "Noir", "1234567");
 
 select * from Books;
 
--- DROP DATABASE Biblioteka;
+DROP DATABASE Biblioteka;

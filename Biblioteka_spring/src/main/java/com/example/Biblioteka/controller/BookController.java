@@ -22,6 +22,12 @@ public class BookController {
         model.addAttribute("books", books);
         return "books";
     }
+
+    @GetMapping("books")
+    public List<Book> getBooks(){
+        return bookService.getAllBooks();
+    }
+
     @PostMapping("/addBook")
     public Book addBook(@RequestBody BookDTO bookdto){
         Book book = new Book();
