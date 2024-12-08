@@ -11,6 +11,10 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "loan_id")
+    private Loan loan;
+
     @Column(name = "title")
     private String title;
 
@@ -26,8 +30,13 @@ public class Book {
     @Column(name = "isbn")
     private String isbn;
 
-    public Book(){}
+    public Loan getLoan() {
+        return loan;
+    }
 
+    public void setLoan(Loan loan) {
+        this.loan = loan;
+    }
 
     public Long getId() {
         return id;

@@ -19,4 +19,8 @@ public class BookService {
     public Book addBook(Book book){
         return bookRepository.save(book);
     }
+
+    public Book findByID(Long id){
+        return bookRepository.findById(id).orElseThrow();
+    }
 }
