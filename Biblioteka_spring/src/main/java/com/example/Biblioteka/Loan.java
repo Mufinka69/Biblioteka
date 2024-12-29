@@ -1,10 +1,11 @@
 package com.example.Biblioteka;
 
-import jakarta.persistence.*;
 
-import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 
 @Entity
@@ -14,16 +15,14 @@ public class Loan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long loanID;
 
-    // tutaj zmienic na list i many to one
-//    @OneToOne
-//    private Book book;
+    @ManyToOne
+    @JoinColumn(name = "bookID")
+    @JsonIgnoreProperties("loans")
+    private Book book;
 
-//    @JoinColumn(name = "book_id")
-    @OneToMany
-    private List<Book> books = new ArrayList<>();
-
-    @OneToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne
+    @JoinColumn(name = "userID")
+    @JsonIgnoreProperties("loans")
     private User user;
 
     @Column
@@ -32,24 +31,20 @@ public class Loan {
     @Column
     private Date returnDate;
 
-
-    public List<Book> getBookID() {
-        return books;
+    public Long getLoanID() {
+        return loanID;
     }
 
-    public void setBookID(Book bookID) {
-        if (books == null) {
-            books = new ArrayList<>();
-        }
-        books.add(bookID);
+    public void setLoanID(Long loanID) {
+        this.loanID = loanID;
     }
 
-    public User getUserID() {
+    public User getUser() {
         return user;
     }
 
-    public void setUserID(User userID) {
-        this.user = userID;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Date getRentalDate() {
@@ -66,5 +61,13 @@ public class Loan {
 
     public void setReturnDate(Date returnDate) {
         this.returnDate = returnDate;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 }

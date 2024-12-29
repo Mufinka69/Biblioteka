@@ -1,19 +1,21 @@
 package com.example.Biblioteka;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "Books")
 public class Book {
 
     @Id
-    @Column(name = "book_id")
+    @Column(name = "bookID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "loan_id")
-    private Loan loan;
+    @OneToMany(mappedBy = "book")
+    private List<Loan> loans;
 
     @Column(name = "title")
     private String title;
@@ -30,12 +32,19 @@ public class Book {
     @Column(name = "isbn")
     private String isbn;
 
-    public Loan getLoan() {
-        return loan;
+//    @OneToMany(mappedBy = "book")
+    public List<Loan> getLoans() {
+        return loans;
     }
 
-    public void setLoan(Loan loan) {
-        this.loan = loan;
+    public int howManyLoans(){
+        return loans.size();
+    }
+
+    //Gettery i settery
+
+    public void setLoans(List<Loan> loans) {
+        this.loans = loans;
     }
 
     public Long getId() {

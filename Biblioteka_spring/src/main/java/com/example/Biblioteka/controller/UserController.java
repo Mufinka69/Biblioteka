@@ -1,7 +1,9 @@
 package com.example.Biblioteka.controller;
 
 import com.example.Biblioteka.DTO.UserDTO;
+import com.example.Biblioteka.Role;
 import com.example.Biblioteka.User;
+import com.example.Biblioteka.service.RoleService;
 import com.example.Biblioteka.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -10,21 +12,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("UserPanel")
+@RequestMapping("userPanel")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RoleService roleService;
+
     @GetMapping("./users")
-    public String getBooks(Model model){
+    public String getUser(Model model){
         List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
         return "users";
     }
 
     @GetMapping("users")
-    public List<User> getBooks(){
+    public List<User> getUser(){
         return userService.getAllUsers();
     }
 
@@ -34,10 +39,20 @@ public class UserController {
         user.setLogin(userDTO.getLogin());
         user.setPassword(userDTO.getPassword());
         user.setEmail(userDTO.getEmail());
-        user.setPhoneNumber(userDTO.getPhone_number());
+        user.setPhoneNumber(userDTO.getPhoneNumber());
+
+
+        Role role = roleService.findByID(userDTO.getRoleID());
+        user.setRole(role);
+
         return userService.addUser(user);
     }
 
+    @DeleteMapping("/users/{userID}")
+    public List<User> deleteUser(@PathVariable Long userID) {
+        userService.deleteUser(userID);
+        return userService.getAllUsers();
+    }
 }
 
 

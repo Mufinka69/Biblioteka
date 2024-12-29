@@ -1,5 +1,6 @@
 package com.example.Biblioteka;
 
+import java.util.Set;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,6 +13,10 @@ public class Role {
 
     @Column
     private String roleName;
+
+    @OneToMany(mappedBy = "role")
+    private Set<User> users;
+
 
     public Long getRoleID() {
         return roleID;

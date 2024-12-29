@@ -1,13 +1,17 @@
 package com.example.Biblioteka;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "Users")
 public class User {
 
     @Id
-    @Column(name = "user_id")
+    @Column(name = "userID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
@@ -22,6 +26,13 @@ public class User {
 
     @Column(name = "phoneNumber")
     private String phoneNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "role")
+    private Role role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Loan> loans;
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -61,5 +72,13 @@ public class User {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
