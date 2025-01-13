@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dodaj książkę</title>
+    <link rel="stylesheet" href="css/login_sytle.css">
+    <script src="book/book.js" defer></script>
+</head>
+<body>
+<form onsubmit="add_book(event)">
+    <label for="title">Tytuł:</label>
+    <input type="text" id="title" name="title" required>
+
+    <label for="author">Autor:</label>
+    <input type="text" id="author" name="author" required>
+
+    <label for="date">Data wydania:</label>
+    <input type="date" id="date" name="date" required>
+
+    <label for="isbn">ISBN:</label>
+    <input type="text" id="isbn" name="isbn" required>
+
+    <button type="submit">Dodaj książkę</button>
+</form>
+</body>
+</html>

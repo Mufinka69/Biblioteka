@@ -1,0 +1,68 @@
+body{
+    background-color: rgb(255, 232, 240);
+    background-image: url(logo.jpeg);
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: 90px;
+}
+
+.zbior-menu{
+    display: flex;
+    position: absolute;
+}
+
+.menu{
+    margin-right: 20px;
+    color: rgb(255, 232, 240);
+    border: 2px solid rgb(0, 0, 0);
+    background-color: rgb(187, 30, 82);
+    width: 8em;
+    border-radius: 2px;
+}
+
+.menu:hover a{
+    display: block;
+}
+.menu a{
+    display: none;
+    border-top: 2px solid rgb(187, 30, 82);
+    background-color: white;
+    width: 8em;
+    text-decoration: none;
+    color: rgb(255, 232, 240);
+}
+.menu a:hover{
+     background-color: rgb(190, 115, 159);
+}
+
+
+#title{
+    text-align: center;
+}
+#h1{
+    border-style: inset;
+    border-color:rgb(187, 30, 82);
+    display: inline-block;
+}
+
+.floated{
+    background-color: rgb(190, 115, 159);
+    font-size: 2em;
+    padding: 0.2em;
+    float: right;
+    text-align: left;
+    width: 30%
+}
+.sekcja{
+    border: 2px solid rgb(187, 30, 82);
+}
+
+
+.center{
+    text-align: center;
+}
+
+.przycisk_adm{
+    background-color: rgb(255, 232, 240);
+    border-color: rgb(255, 29, 108);
+}
