@@ -1,36 +1,34 @@
 const apiBaseUrl = "http://localhost:8080/bookPanel";
 
-
-function add_book(event) {
+function addBook(event) {
     event.preventDefault();
 
     const book = {
         title: document.getElementById("title").value,
         author: document.getElementById("author").value,
         date: document.getElementById("date").value,
+        publishing_house: document.getElementById("publishing_house").value,
         isbn: document.getElementById("isbn").value
     };
 
-    fetch('http://localhost:8080/bookPanel/addBook', {
-        method: 'POST',
+    fetch(`${apiBaseUrl}/addBook`, {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(book)
     })
-    .then(response => {
-        if (response.ok) {
-            alert("Książka została dodana!");
-            document.getElementById("addBookForm").reset();
-        } else {
-            alert("Wystąpił błąd podczas dodawania książki.");
-        }
-    })
-    .catch(error => {
-        console.error("Błąd:", error);
-        alert("Wystąpił błąd!");
-    });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(() => {
+            alert("Dodano Ksiazkę!");
+            loadBooks();
+        })
+        .catch(error => console.error("Error adding Book:", error));
 }
 
-//document.getElementById("loadUsers").addEventListener("click", loadUsers);
-//document.getElementById("addUserForm").addEventListener("submit", addUser);
+document.getElementById("addBookForm").addEventListener("submit", addBook);

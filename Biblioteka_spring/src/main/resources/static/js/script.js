@@ -1,35 +1,5 @@
 const apiBaseUrl = "http://localhost:8080/userPanel";
 
-function loadUsers() {
-    fetch(`${apiBaseUrl}/users`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(users => {
-            const userTable = document.getElementById("userTable");
-            userTable.innerHTML = "";
-
-            users.forEach(user => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${user.id}</td>
-                    <td>${user.login}</td>
-                    <td>${user.email}</td>
-                    <td>${user.phoneNumber}</td>
-                    <td>${user.role.name}</td>
-                    <td>
-                        <button onclick="deleteUser(${user.id})">Usuń</button>
-                    </td>
-                `;
-                userTable.appendChild(row);
-            });
-        })
-        .catch(error => console.error("Error loading users:", error));
-}
-
 function addUser(event) {
     event.preventDefault();
 

@@ -5,23 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dodaj książkę</title>
     <link rel="stylesheet" href="css/login_sytle.css">
-    <script src="book/book.js" defer></script>
 </head>
+
 <body>
-<form onsubmit="add_book(event)">
-    <label for="title">Tytuł:</label>
-    <input type="text" id="title" name="title" required>
+<div class="add-book">
+    <form id="addBookForm">
+        <label for="title">Tytuł:</label>
+        <input type="text" id="title" required>
 
-    <label for="author">Autor:</label>
-    <input type="text" id="author" name="author" required>
+        <label for="author">Autor:</label>
+        <input type="text" id="author" required>
 
-    <label for="date">Data wydania:</label>
-    <input type="date" id="date" name="date" required>
+        <label for="date">Data wydania:</label>
+        <input type="date" id="date" required>
 
-    <label for="isbn">ISBN:</label>
-    <input type="text" id="isbn" name="isbn" required>
+        <label for="publishing_house">wydawnictwo:</label>
+        <input type="text" id="publishing_house" required>
 
-    <button type="submit">Dodaj książkę</button>
-</form>
+        <label for="isbn">ISBN:</label>
+        <input type="text" id="isbn" required>
+
+        <button type="submit">Dodaj książkę</button>
+    </form>
+</div>
+
+<script src="js/book.js"></script>
 </body>
 </html>
