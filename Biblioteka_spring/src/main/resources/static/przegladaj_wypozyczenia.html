@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Przeglądaj książki</title>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<div id ="bookList">
+    <table id="table">
+
+        <thead style="font-weight: bold">
+        <td>Tytuł</td>
+        <td>Autor</td>
+        <td>Data wydania</td>
+        <td>Wydawnictwo</td>
+        <td>ISBN</td>
+        </thead>
+
+        <tbody>
+        </tbody>
+
+        <script>
+
+            fetch(`http://localhost:8080/loanPanel/loans`)
+                .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+
+                }).then(function(data) {
+                        let table = document.getElementById("table");
+                        console.log(data)
+                        data.forEach(loan => {table.innerHTML += '<tr>' +
+                                            '<td>' + loan.loanID + '</td>' +
+                                            '<td>' + loan.book.title + '</td>' +
+                                            '<td>' + loan.rentalDate + '</td>' +
+                                            '<td>' + loan.returnDate + '</td>' +
+                                        '</tr>'});
+                  })
+                .catch(error => console.error("Error listing books:", error));
+
+        </script>
+
+    </table>
+</div>
+
+</body>
+</html>

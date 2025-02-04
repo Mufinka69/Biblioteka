@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Przeglądaj książki</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/przycisk.js"></script>
+
+</head>
+
+<body>
+
+<div id ="bookList">
+    <table id="table">
+
+        <thead style="font-weight: bold">
+        <td>Tytuł</td>
+        <td>Autor</td>
+        <td>Data wydania</td>
+        <td>Wydawnictwo</td>
+        <td>ISBN</td>
+        </thead>
+
+        <tbody>
+        </tbody>
+        <script>
+
+
+
+            fetch(`http://localhost:8080/bookPanel/books`)
+                .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+
+                }).then(function(data) {
+                        let table = document.getElementById("table");
+                        data.forEach(book => {table.innerHTML += '<tr>' +
+                                            '<td>' + book.title + '</td>' +
+                                            '<td>' + book.author + '</td>' +
+                                            '<td>' + book.date + '</td>' +
+                                            '<td>' + book.publishing_house + '</td>' +
+                                            '<td>' + book.isbn + '</td>' +
+                                            '<td><button onclick="wypozycz(' + book.id + ')">Wypożycz</button></td>' +
+                                        '</tr>'});
+                  })
+                .catch(error => console.error("Error listing books:", error));
+
+        </script>
+    </table>
+</div>
+
+</body>
+</html>

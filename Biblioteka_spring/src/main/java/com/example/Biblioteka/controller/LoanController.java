@@ -36,6 +36,8 @@ public class LoanController {
     @PostMapping("/addLoan")
     public Loan addLoan(@RequestBody LoanDTO loanDTO){
         Loan loan = new Loan();
+        System.out.println(loanDTO.getUserID());
+        System.out.println(loanDTO.getBookID());
         User user = userService.findByID(loanDTO.getUserID());
         Book book = bookService.findByID(loanDTO.getBookID());
 

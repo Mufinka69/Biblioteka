@@ -42,8 +42,8 @@ public class UserDTO {
     }
 
     public Long getRoleID() {
-        return roleID;
-    }
+        return (long) 1;
+    } //{return roleID;}
 
     public void setRoleID(Long roleID) {
         this.roleID = roleID;
